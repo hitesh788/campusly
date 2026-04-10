@@ -7,6 +7,7 @@ import {
   List, ListItem, ListItemAvatar, ListItemText, Tooltip
 } from '@mui/material';
 import API from '../utils/api';
+import { API_BASE_URL } from '../config';
 import DigitalTwinWidget from '../components/DigitalTwinWidget';
 import SchoolIcon from '@mui/icons-material/School';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -195,7 +196,7 @@ const TeacherDashboard = () => {
                     sx={{ py: 2 }}
                   >
                     <ListItemAvatar>
-                      <Avatar src={student.profileImage ? `http://localhost:5000${student.profileImage}` : ''}>
+                      <Avatar src={student.profileImage ? `${API_BASE_URL}${student.profileImage}` : ''}>
                         {student.name.charAt(0)}
                       </Avatar>
                     </ListItemAvatar>

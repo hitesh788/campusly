@@ -4,6 +4,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 const PORT = process.env.PORT || 5000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Connect to Database
 connectDB();
@@ -13,7 +14,7 @@ const server = http.createServer(app);
 // Socket.io Setup
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://campusly-nu.vercel.app",
     methods: ["GET", "POST"]
   }
 });
@@ -35,5 +36,5 @@ global.io = io;
 app.set('socketio', io);
 
 server.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log(`Server running in ${NODE_ENV} mode on port ${PORT}`);
 });

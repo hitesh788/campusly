@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Box, Typography, TextField, Button, Paper, Alert } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AUTH_API_URL } from '../config';
 
 const ForgotPassword = () => {
   const [rollNumber, setRollNumber] = useState('');
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/auth/forgotpassword', {
+      const response = await axios.post(`${AUTH_API_URL}/forgotpassword`, {
         rollNumber,
       });
 
@@ -38,7 +39,7 @@ const ForgotPassword = () => {
             Forgot Password
           </Typography>
           <Typography variant="body2" align="center" sx={{ mb: 2 }}>
-            Enter your roll number. We will send the password reset link to `balasuryad13062006@gmail.com`.
+            Enter your roll number. We will send the password reset link to the email associated with your account.
           </Typography>
           
           {message.text && (

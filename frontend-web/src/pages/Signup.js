@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Box, Typography, TextField, Button, Paper, MenuItem, Alert } from '@mui/material';
+import { AUTH_API_URL } from '../config';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: 'balasuryad13062006@gmail.com',
+    email: '',
     password: '',
     role: 'student',
     rollNumber: '',
@@ -81,7 +82,7 @@ const Signup = () => {
         submitData.rollNumber = formData.rollNumber;
       }
 
-      const response = await axios.post('http://localhost:5000/api/v1/auth/register', submitData);
+      const response = await axios.post(`${AUTH_API_URL}/register`, submitData);
       if (response.data.success) {
         setMessage({ type: 'success', text: 'Registration successful! Redirecting to login...' });
         setTimeout(() => navigate('/login'), 1500);
@@ -133,7 +134,6 @@ const Signup = () => {
               onChange={onChange}
               error={!!errors.email}
               helperText={errors.email}
-              disabled
             />
             <TextField
               margin="normal"

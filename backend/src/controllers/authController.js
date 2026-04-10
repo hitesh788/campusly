@@ -8,12 +8,16 @@ const sendEmail = require('../utils/sendEmail');
 // @access  Public
 exports.register = async (req, res, next) => {
   try {
-    const { name, password, role, rollNumber } = req.body;
-    const email = 'balasuryad13062006@gmail.com'; // Use common email for all users
+    const { name, email, password, role, rollNumber } = req.body;
+    const normalizedEmail = email?.trim().toLowerCase();
 
     // Validate required fields
-    if (!name || !password || !role) {
+    if (!name || !normalizedEmail || !password || !role) {
       return res.status(400).json({ message: 'Please provide all required fields' });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      return res.status(400).json({ message: 'Please provide a valid email address' });
     }
 
     // Students must have a roll number
@@ -22,7 +26,7 @@ exports.register = async (req, res, next) => {
     }
 
     // Check if user already exists
-    let existingUser = await User.findOne({ email });
+    let existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered' });
     }
@@ -40,7 +44,7 @@ exports.register = async (req, res, next) => {
     // Create user object - only add rollNumber for students
     const userData = {
       name,
-      email,
+      email: normalizedEmail,
       password,
       role,
       verificationToken,

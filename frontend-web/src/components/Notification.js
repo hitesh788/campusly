@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import io from 'socket.io-client';
 import { useSelector } from 'react-redux';
+import { SOCKET_URL } from '../config';
 
 const Notification = () => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const Notification = () => {
 
   useEffect(() => {
     if (!socket.current && user) {
-      socket.current = io('http://localhost:5000');
+      socket.current = io(SOCKET_URL);
 
       socket.current.on('connect', () => {
         console.log('Connected to notification server');

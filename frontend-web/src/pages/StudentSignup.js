@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../store/authSlice';
+import { API_URL } from '../config';
 import { 
   Container, Box, Typography, TextField, Button, Paper, Alert, 
   CircularProgress, Grid, Card, CardContent, Stepper, Step, StepLabel 
@@ -16,7 +17,7 @@ const StudentSignup = () => {
     rollNumber: '',
     password: '',
     name: '',
-    email: 'balasuryad13062006@gmail.com',
+    email: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -63,7 +64,7 @@ const StudentSignup = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/v1/auth/verify-student-credentials`,
+        `${API_URL}/auth/verify-student-credentials`,
         { rollNumber, password }
       );
 
@@ -97,7 +98,7 @@ const StudentSignup = () => {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/v1/students/${existingUserData._id}/complete-signup`,
+        `${API_URL}/students/${existingUserData._id}/complete-signup`,
         { name, email }
       );
 
@@ -267,7 +268,6 @@ const StudentSignup = () => {
                 autoComplete="email"
                 value={email}
                 onChange={onChange}
-                disabled
               />
 
               <Grid container spacing={2} sx={{ mt: 1 }}>

@@ -17,6 +17,7 @@ import {
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import api from '../utils/api';
 import { updateAuthUser } from '../store/authSlice';
+import { API_BASE_URL } from '../config';
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
@@ -33,7 +34,7 @@ const Profile = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   const [uploading, setUploading] = useState(false);
 
-  const baseUrl = 'http://localhost:5000'; // Should ideally be in env
+  const baseUrl = API_BASE_URL;
 
   useEffect(() => {
     if (user) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Box, Typography, TextField, Button, Paper, Alert } from '@mui/material';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AUTH_API_URL } from '../config';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.put(`http://localhost:5000/api/v1/auth/resetpassword/${token}`, { password });
+      const response = await axios.put(`${AUTH_API_URL}/resetpassword/${token}`, { password });
       if (response.data.success) {
         setMessage({ type: 'success', text: 'Password reset successful! Please log in with your new password.' });
         setTimeout(() => navigate('/login/student'), 3000);

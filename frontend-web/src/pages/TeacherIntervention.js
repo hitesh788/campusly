@@ -11,6 +11,7 @@ import {
   Psychology, HealthAndSafety, Save
 } from '@mui/icons-material';
 import API from '../utils/api';
+import { API_BASE_URL } from '../config';
 
 const TeacherIntervention = () => {
   const { studentId } = useParams();
@@ -89,7 +90,7 @@ const TeacherIntervention = () => {
             <CardContent sx={{ pt: 4 }}>
               <Stack alignItems="center" spacing={2} sx={{ mb: 4 }}>
                 <Avatar 
-                  src={student.profileImage ? `http://localhost:5000${student.profileImage}` : ''}
+                  src={student.profileImage ? `${API_BASE_URL}${student.profileImage}` : ''}
                   sx={{ width: 100, height: 100, border: '4px solid #F0F6FF' }}
                 >
                   {student.name.charAt(0)}

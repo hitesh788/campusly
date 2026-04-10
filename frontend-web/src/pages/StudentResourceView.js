@@ -5,6 +5,7 @@ import {
   Paper, Avatar, Divider
 } from '@mui/material';
 import API from '../utils/api';
+import { API_BASE_URL } from '../config';
 import SearchIcon from '@mui/icons-material/Search';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -105,7 +106,7 @@ const StudentResourceView = () => {
                     variant="contained" 
                     size="small" 
                     startIcon={res.type === 'Video' ? <PlayCircleOutlineIcon /> : <DownloadIcon />}
-                    href={`http://localhost:5000${res.fileUrl}`}
+                    href={`${API_BASE_URL}${res.fileUrl}`}
                     target="_blank"
                     sx={{ borderRadius: 2 }}
                   >

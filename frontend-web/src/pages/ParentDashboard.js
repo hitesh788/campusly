@@ -6,6 +6,7 @@ import {
   Avatar, Stack, Divider, Chip, Paper, List, ListItem, ListItemAvatar, ListItemText
 } from '@mui/material';
 import API from '../utils/api';
+import { API_BASE_URL } from '../config';
 import SchoolIcon from '@mui/icons-material/School';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import MessageIcon from '@mui/icons-material/Message';
@@ -22,7 +23,7 @@ const ChildSummary = ({ child, onClick }) => (
     }}
   >
     <Stack direction="row" spacing={2} alignItems="center">
-      <Avatar src={child.profileImage ? `http://localhost:5000${child.profileImage}` : ''}>
+      <Avatar src={child.profileImage ? `${API_BASE_URL}${child.profileImage}` : ''}>
         {child.name.charAt(0)}
       </Avatar>
       <Box sx={{ flex: 1 }}>
