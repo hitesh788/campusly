@@ -196,7 +196,7 @@ const Header = ({ toggleColorMode, mode }) => {
                     onClick={() => navigate('/')}
                     sx={{ borderRadius: '10px' }}
                   >
-                    Login
+                    
                   </Button>
                 )}
               </Box>

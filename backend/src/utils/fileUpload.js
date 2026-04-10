@@ -1,10 +1,14 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
+const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'avatars');
+fs.mkdirSync(uploadDir, { recursive: true });
 
 // Set Storage Engine
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'public/uploads/avatars');
+    cb(null, uploadDir);
   },
   filename: function(req, file, cb) {
     cb(null, `avatar-${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);

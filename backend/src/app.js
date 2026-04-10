@@ -8,7 +8,11 @@ const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 
+const fs = require('fs');
 const app = express();
+
+const avatarUploadPath = path.join(__dirname, '../public/uploads/avatars');
+fs.mkdirSync(avatarUploadPath, { recursive: true });
 
 app.set('trust proxy', 1);
 
